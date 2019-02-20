@@ -19,6 +19,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        replaceFragment(HomeFragment(), R.id.frmContainer)
         navMain.setOnNavigationItemSelectedListener(this)
     }
 

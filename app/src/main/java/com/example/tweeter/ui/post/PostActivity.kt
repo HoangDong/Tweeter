@@ -1,13 +1,36 @@
 package com.example.tweeter.ui.post
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.example.base.acitivity.BaseViewModelActivity
+import com.example.tweeter.BR
 import com.example.tweeter.R
+import com.example.tweeter.data.local.AppDatabase
+import com.example.tweeter.databinding.ActivityPostBinding
+import android.app.Activity
+import android.content.Intent
 
-class PostActivity : AppCompatActivity() {
+
+
+class PostActivity : BaseViewModelActivity<ActivityPostBinding,PostViewModel>(),PostView {
+    override fun getViewModel(): PostViewModel {
+        return  PostViewModel(this,AppDatabase.getInstance(this))
+    }
+
+    override fun getBindingVariable(): Int {
+      return  BR.viewModel
+    }
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_post
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_post)
+    }
+
+    override fun onTweetSuccess() {
+        setResult(Activity.RESULT_OK, Intent())
+        finish()
     }
 }
