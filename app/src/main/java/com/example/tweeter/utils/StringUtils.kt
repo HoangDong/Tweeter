@@ -6,7 +6,7 @@ object StringUtils {
 
         //Return if empty
         if(input.isEmpty())
-            throw IllegalArgumentException("The message is empty")
+            throw Exception("The message is empty")
 
         //Estimate number split
         var estSplit = Math.ceil(input.length / limitChar.toDouble()).toInt()
@@ -19,7 +19,7 @@ object StringUtils {
         }
         //Check have word span of non-whitespace characters longer than limit characters
         if (checkErrorLimitWord(input,limitChar)) {
-            throw IllegalArgumentException("The message contains a span of non-whitespace characters longer than 50 characters")
+            throw Exception("The message contains a span of non-whitespace characters longer than 50 characters")
         }
 
         var tempMsg: String

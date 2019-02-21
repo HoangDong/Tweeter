@@ -34,7 +34,7 @@ class PostViewModel(private val mView:PostView, private var dataBase: AppDatabas
                     mView.onTweetSuccess()
                 }.subscribe()
             }
-        }catch (e: IllegalArgumentException)
+        }catch (e: Exception)
         {
             mView.onErrorInput(e.message?:"")
         }
