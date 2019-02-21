@@ -1,82 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.main.home.HomeFragment">
-
-    <android.support.v7.widget.CardView
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.view.View"/>
+        <variable name="viewModel" type="com.example.tweeter.ui.main.home.HomeViewModel"/>
+    </data>
+    <android.support.v4.widget.NestedScrollView
+            android:background="@color/colorBackground"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:id="@+id/cvPost">
-
-        <LinearLayout
+            android:layout_height="match_parent">
+        <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="8dp"
-                android:gravity="center_vertical">
-            <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@color/colorAccent"
-                    android:id="@+id/imageView"/>
-            <TextView
+                android:focusableInTouchMode="true"
+                android:descendantFocusability="blocksDescendants"
+                tools:context=".ui.main.home.HomeFragment">
+
+            <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:cardElevation="0.5dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:id="@+id/cvPost">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:padding="12dp"
+                        android:gravity="center_vertical" tools:ignore="UseCompoundDrawables">
+                    <ImageView
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/img_avatar"
+                            android:id="@+id/imageView" tools:ignore="ContentDescription"/>
+                    <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="16dp"
+                            android:textSize="16sp"
+                            android:gravity="center|start"
+                            android:textColor="?android:textColorHint"
+                            android:text="@string/how_are_you_today"
+                            android:layout_marginStart="16dp"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardElevation="0.5dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@+id/cvPost" app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:id="@+id/cardView2">
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:weightSum="3">
+                    <TextView android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:gravity="center"
+                              android:paddingTop="8dp"
+                              android:paddingBottom="8dp"
+                              android:text="@string/photo"/>
+                    <View android:layout_width="1dp"
+                          android:layout_height="match_parent"
+                          android:background="@color/colorGrayLight"/>
+                    <TextView android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:gravity="center"
+                              android:paddingTop="8dp"
+                              android:paddingBottom="8dp"
+                              android:text="@string/video"/>
+                    <View android:layout_width="1dp"
+                          android:layout_height="match_parent"
+                          android:background="@color/colorGrayLight"/>
+                    <TextView android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:layout_weight="1"
+                              android:gravity="center"
+                              android:paddingTop="8dp"
+                              android:paddingBottom="8dp"
+                              android:text="@string/backgound"/>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="match_parent"
+                      android:textSize="17sp"
+                      android:id="@+id/tvNoMessage"
+                      android:visibility="@{viewModel.noData?View.VISIBLE:View.GONE}"
+                      android:text="@string/have_no_message" app:layout_constraintEnd_toEndOf="parent"
+                      android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+                      android:layout_marginStart="8dp"
+                      app:layout_constraintTop_toBottomOf="@+id/cardView2" android:layout_marginTop="140dp"/>
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvFeed"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:gravity="center|start"
-                    android:text="How are you today?"/>
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/cvPost" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp" android:layout_marginLeft="24dp" android:layout_marginStart="24dp"
-            android:id="@+id/cardView2">
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:weightSum="3">
-            <TextView android:layout_width="0dp"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:gravity="center"
-                      android:text="Photo"/>
-            <TextView android:layout_width="0dp"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:gravity="center"
-                      android:text="Video"/>
-
-            <TextView android:layout_width="0dp"
-                      android:layout_height="wrap_content"
-                      android:layout_weight="1"
-                      android:gravity="center"
-                      android:text="Backgound"/>
-
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-    <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvFeed"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            tools:listitem="@layout/item_feed"
-            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/cardView2" android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-</android.support.constraint.ConstraintLayout>
+                    tools:listitem="@layout/item_feed"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"/>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.v4.widget.NestedScrollView>
+</layout>

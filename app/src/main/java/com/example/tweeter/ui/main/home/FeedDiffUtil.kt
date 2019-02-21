@@ -3,7 +3,7 @@ package com.example.tweeter.ui.main.home
 import android.support.v7.util.DiffUtil
 import com.example.tweeter.data.model.Message
 
-class FeedDiffUtil(val mOldFeedList: List<Message>, val mNewFeedList: List<Message>): DiffUtil.Callback() {
+class FeedDiffUtil(private val mOldFeedList: List<Message>, private val mNewFeedList: List<Message>): DiffUtil.Callback() {
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return mOldFeedList[oldItemPosition].id==mNewFeedList[newItemPosition].id

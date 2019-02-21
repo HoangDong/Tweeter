@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import com.example.base.viewmodel.BaseViewModel
 
 
-abstract class BaseViewModelActivity<T : ViewDataBinding, V: BaseViewModel> : BaseActivity() {
+abstract class BaseMvvmActivity<T : ViewDataBinding, V: BaseViewModel> : BaseActivity() {
     private lateinit var mViewDataBinding: T
     private var mViewModel: V? = null
 

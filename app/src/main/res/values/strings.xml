@@ -4,5 +4,10 @@
     <string name="search">Search</string>
     <string name="notification">Notification</string>
     <string name="profile">Profile</string>
+    <string name="how_are_you_today">How are you today?</string>
+    <string name="photo">Photo</string>
+    <string name="video">Video</string>
+    <string name="backgound">Backgound</string>
+    <string name="have_no_message">Have no message</string>
 
 </resources>

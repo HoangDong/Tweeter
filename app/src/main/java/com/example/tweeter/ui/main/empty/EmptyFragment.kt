@@ -15,7 +15,7 @@ class EmptyFragment : Fragment() {
             val bundle=Bundle()
             bundle.putString(NAME,name)
             val fragment = EmptyFragment()
-            fragment.arguments=Bundle()
+            fragment.arguments=bundle
             return fragment
         }
     }

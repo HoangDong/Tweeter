@@ -7,17 +7,17 @@
             android:title="@string/home" />
 
     <item
-            android:id="@+id/navigation_gifts"
+            android:id="@+id/navSearch"
             android:icon="@drawable/ic_find"
             android:title="@string/search" />
 
     <item
-            android:id="@+id/navigation_cart"
+            android:id="@+id/navNotification"
             android:icon="@drawable/ic_ring"
             android:title="@string/notification" />
 
     <item
-            android:id="@+id/navigation_profile"
+            android:id="@+id/navProfile"
             android:icon="@drawable/ic_profile"
             android:title="@string/profile" />
 

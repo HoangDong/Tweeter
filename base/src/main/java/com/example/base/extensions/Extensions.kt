@@ -1,5 +1,6 @@
 package com.example.base.extensions
 
+import android.content.res.Resources
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentTransaction
@@ -19,3 +20,6 @@ fun BaseActivity.addFragment(fragment: Fragment, frameId: Int){
 fun BaseActivity.replaceFragment(fragment: Fragment, frameId: Int) {
     supportFragmentManager.inTransaction{replace(frameId, fragment)}
 }
+
+val Int.px: Float
+    get() = (this * Resources.getSystem().displayMetrics.density)

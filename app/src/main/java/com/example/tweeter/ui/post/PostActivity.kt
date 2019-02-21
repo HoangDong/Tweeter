@@ -1,7 +1,7 @@
 package com.example.tweeter.ui.post
 
 import android.os.Bundle
-import com.example.base.acitivity.BaseViewModelActivity
+import com.example.base.acitivity.BaseMvvmActivity
 import com.example.tweeter.BR
 import com.example.tweeter.R
 import com.example.tweeter.data.local.AppDatabase
@@ -11,7 +11,7 @@ import android.content.Intent
 
 
 
-class PostActivity : BaseViewModelActivity<ActivityPostBinding,PostViewModel>(),PostView {
+class PostActivity : BaseMvvmActivity<ActivityPostBinding,PostViewModel>(),PostView {
     override fun getViewModel(): PostViewModel {
         return  PostViewModel(this,AppDatabase.getInstance(this))
     }
