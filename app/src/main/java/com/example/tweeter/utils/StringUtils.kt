@@ -2,27 +2,29 @@ package com.example.tweeter.utils
 
 
 object StringUtils {
-    fun splitMessage(inputMsg: String, limitChar: Int): Array<String> {
-        if(inputMsg.isEmpty())
+    fun splitMessage(input: String, limitChar: Int): Array<String> {
+
+        //Return if empty
+        if(input.isEmpty())
             throw IllegalArgumentException("The message is empty")
 
-        var estSplit = Math.ceil(inputMsg.length / limitChar.toDouble()).toInt()
+        //Estimate number split
+        var estSplit = Math.ceil(input.length / limitChar.toDouble()).toInt()
         var results: Array<String>
 
         //User's input is less than or equal to limit characters
-        if (inputMsg.length <= limitChar) {
-            results = arrayOf(inputMsg)
+        if (input.length <= limitChar) {
+            results = arrayOf(input)
             return results
         }
-
         //Check have word span of non-whitespace characters longer than limit characters
-        if (checkErrorLimitWord(inputMsg,limitChar)) {
+        if (checkErrorLimitWord(input,limitChar)) {
             throw IllegalArgumentException("The message contains a span of non-whitespace characters longer than 50 characters")
         }
 
         var tempMsg: String
         // Remove all extra white space
-        val inputMsg = inputMsg.trim().replace("\\s+".toRegex(), " ")
+        val inputMsg = input.trim().replace("\\s+".toRegex(), " ")
         do {
             tempMsg = inputMsg
             results = Array(estSplit) { "" }
@@ -71,11 +73,10 @@ object StringUtils {
         }
     }
 
-    private fun getMostPossibleWhiteSpacePosition(inputString: String, limitChar: Int): Int {
-        var inputString = inputString
+    private fun getMostPossibleWhiteSpacePosition(input: String, limitChar: Int): Int {
+        var inputString = input
         var currentWhiteSpacePosition: Int
         var positionIsPossible = false
-
         do {
             currentWhiteSpacePosition = inputString.lastIndexOf(" ")
             if (currentWhiteSpacePosition < limitChar) {

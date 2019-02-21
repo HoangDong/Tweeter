@@ -3,17 +3,14 @@ package com.example.tweeter.ui.post
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.databinding.ObservableInt
-import android.databinding.adapters.TextViewBindingAdapter
-import android.util.Log
 import com.example.base.viewmodel.BaseViewModel
 import com.example.tweeter.data.local.AppDatabase
 import com.example.tweeter.data.model.Message
 import com.example.tweeter.utils.StringUtils
 import io.reactivex.Completable
-import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
-class PostViewModel(private val mView:PostView, var dataBase: AppDatabase?) : BaseViewModel() {
+class PostViewModel(private val mView:PostView, private var dataBase: AppDatabase?) : BaseViewModel() {
     companion object {
         const val LIMIT_CHAR=50
     }
@@ -21,7 +18,7 @@ class PostViewModel(private val mView:PostView, var dataBase: AppDatabase?) : Ba
     val tvSweeter = ObservableField<String>("Sweeter")
     val inputSize=ObservableInt(LIMIT_CHAR)
     val enableTweeter=ObservableBoolean(false)
-    lateinit var textSplitCache:Array<String>
+    private lateinit var textSplitCache:Array<String>
 
     fun onTweetClicked() {
         try {
@@ -48,11 +45,11 @@ class PostViewModel(private val mView:PostView, var dataBase: AppDatabase?) : Ba
     fun onTextChanged(text: CharSequence?) {
         text?.let {
             enableTweeter.set(it.isNotEmpty())
+            inputSize.set(LIMIT_CHAR-it.length)
             if(it.isEmpty()) {
                 tvSweeter.set("Sweeter")
                 return
             }
-            inputSize.set(LIMIT_CHAR-it.length)
             try {
                 textSplitCache = StringUtils.splitMessage(it.toString(), LIMIT_CHAR)
                 if(textSplitCache.isNotEmpty())

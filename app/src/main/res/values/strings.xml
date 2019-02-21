@@ -7,8 +7,6 @@
     <string name="how_are_you_today">How are you today?</string>
     <string name="photo">Photo</string>
     <string name="video">Video</string>
-    <string name="backgound">Backgound</string>
+    <string name="background">Backgound</string>
     <string name="have_no_message">Have no message</string>
-    <string name="tweeter">Tweeter $d</string>
-
 </resources>

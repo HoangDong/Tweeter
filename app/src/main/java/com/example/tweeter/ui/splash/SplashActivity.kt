@@ -1,10 +1,8 @@
 package com.example.tweeter.ui.splash
 
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
-import android.view.WindowManager
 import com.example.tweeter.R
 import com.example.tweeter.utils.ActivityUtils
 

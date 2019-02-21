@@ -8,15 +8,17 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
         <activity android:name=".ui.post.PostActivity"
-                  android:windowSoftInputMode="stateVisible">
+                  android:windowSoftInputMode="stateVisible"
+                  android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.main.MainActivity"
+                  android:screenOrientation="portrait">
         </activity>
         <activity android:name=".ui.splash.SplashActivity"
-                  android:theme="@style/Activity.Fullscreen.Theme">
+                  android:theme="@style/Activity.Fullscreen.Theme"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
