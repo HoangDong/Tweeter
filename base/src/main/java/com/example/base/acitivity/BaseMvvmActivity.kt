@@ -11,7 +11,7 @@ import com.example.base.viewmodel.BaseViewModel
 
 abstract class BaseMvvmActivity<T : ViewDataBinding, V: BaseViewModel> : BaseActivity() {
     private lateinit var mViewDataBinding: T
-    private var mViewModel: V? = null
+    var mViewModel: V? = null
 
     abstract fun getViewModel(): V
     abstract fun getBindingVariable(): Int

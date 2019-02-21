@@ -7,12 +7,13 @@ import com.example.tweeter.data.model.Message
 import android.arch.persistence.room.Room
 
 
-
 @Database(entities = [Message::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     companion object {
         private const val DB_NAME = "appDatabase.db"
-        @Volatile private var instance: AppDatabase? = null
+        @Volatile
+        private var instance: AppDatabase? = null
+
         @Synchronized
         fun getInstance(context: Context): AppDatabase? {
             if (instance == null) {
@@ -26,8 +27,10 @@ abstract class AppDatabase : RoomDatabase() {
                 context,
                 AppDatabase::class.java,
                 DB_NAME
-            ).build()
+            ).fallbackToDestructiveMigration()
+                .allowMainThreadQueries().build()
         }
     }
+
     abstract fun daoMessage(): DaoMessage
 }

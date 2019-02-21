@@ -15,10 +15,10 @@ class HomeViewModel(private val dataBase: AppDatabase?) : BaseViewModel() {
     fun getAllMessage() {
         dataBase?.run {
             daoMessage().fetchAllMessages().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).doOnNext {
+                .observeOn(AndroidSchedulers.mainThread()).subscribe({
                     mFeedAdapter.updateMessages(it)
                     noData.set(it.isEmpty())
-                }.subscribe()
+                },{})
 
         }
     }

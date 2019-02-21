@@ -2,31 +2,38 @@ package com.example.tweeter.utils
 
 
 object StringUtils {
-    fun splitMessage(inputMsg: String, limitChar: Int) : Array<String> {
+    fun splitMessage(inputMsg: String, limitChar: Int): Array<String> {
+        if(inputMsg.isEmpty())
+            throw IllegalArgumentException("The message is empty")
 
-        var assumeNumberOfChildMessage = Math.ceil(inputMsg.length / limitChar.toDouble()).toInt()
-
+        var estSplit = Math.ceil(inputMsg.length / limitChar.toDouble()).toInt()
         var results: Array<String>
-        if (inputMsg.length < limitChar) {
+
+        //User's input is less than or equal to limit characters
+        if (inputMsg.length <= limitChar) {
             results = arrayOf(inputMsg)
             return results
         }
-        if (!inputMsg.contains(" ")) {
-            results = arrayOf()
-            return results
+
+        //Check have word span of non-whitespace characters longer than limit characters
+        if (checkErrorLimitWord(inputMsg,limitChar)) {
+            throw IllegalArgumentException("The message contains a span of non-whitespace characters longer than 50 characters")
         }
+
         var tempMsg: String
-        //remove leading, trailing space and duplicate white space.
+        // Remove all extra white space
         val inputMsg = inputMsg.trim().replace("\\s+".toRegex(), " ")
         do {
             tempMsg = inputMsg
-            results = Array(assumeNumberOfChildMessage) {""}
+            results = Array(estSplit) { "" }
             var prefix: String
             var msg: String
-            for (i in 1..assumeNumberOfChildMessage) {
-                prefix = "$i/$assumeNumberOfChildMessage"
+            for (i in 1..estSplit) {
+                prefix = "$i/$estSplit"
                 tempMsg = "$prefix $tempMsg"
-                msg = getFirstMostPossibleChildString(tempMsg,limitChar)
+
+                //Get first most possible child string
+                msg = getFirstMostPossibleChildString(tempMsg, limitChar)
                 if (msg == prefix) {
                     results = arrayOf()
                     tempMsg = ""
@@ -36,26 +43,35 @@ object StringUtils {
                     tempMsg = tempMsg.substring(msg.length, tempMsg.length)
 
                     if (tempMsg.isNotEmpty()) {
-                        //delete first WHITE_SPACE character
+                        //delete first white space character
                         tempMsg = tempMsg.substring(1, tempMsg.length)
                     }
                 }
             }
-            assumeNumberOfChildMessage += 1
+            estSplit += 1
         } while (tempMsg.isNotEmpty())
 
         return results
     }
 
-    private fun getFirstMostPossibleChildString(inputString: String,limitChar: Int): String {
+    private fun checkErrorLimitWord(inputMsg: String, limitChar: Int): Boolean {
+        val words = inputMsg.split(" ")
+        for (word in words) {
+            if (word.length > limitChar)
+                return true
+        }
+        return false
+    }
+
+    private fun getFirstMostPossibleChildString(inputString: String, limitChar: Int): String {
         return if (inputString.length <= limitChar) {
             inputString
         } else {
-            inputString.substring(0, getMostPossibleWhiteSpacePosition(inputString,limitChar))
+            inputString.substring(0, getMostPossibleWhiteSpacePosition(inputString, limitChar))
         }
     }
 
-    private fun getMostPossibleWhiteSpacePosition(inputString: String,limitChar: Int): Int {
+    private fun getMostPossibleWhiteSpacePosition(inputString: String, limitChar: Int): Int {
         var inputString = inputString
         var currentWhiteSpacePosition: Int
         var positionIsPossible = false
